@@ -1,0 +1,35 @@
+{
+  "name": "crawler-challange",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/lucalexand/crawler-challange",
+  "author": "Lucas Lima <lucalexand@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js ignore __tests__",
+    "pretest": "sequelize db:migrate",
+    "test": "jest",
+    "posttest": "sequelize db:migrate:undo:all"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cheerio": "^1.0.0-rc.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "factory-girl": "^5.0.4",
+    "faker": "^4.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.18.2",
+    "request": "^2.88.2",
+    "sequelize": "^5.21.5",
+    "sqlite3": "^4.1.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2",
+    "sequelize-cli": "^5.5.1",
+    "supertest": "^4.0.2"
+  }
+}
