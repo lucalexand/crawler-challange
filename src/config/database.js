@@ -1,12 +1,8 @@
 require('dotenv').config();
 
 module.exports = {
-  host: process.env.DB_HOST,
-  username: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  dialect: process.env.DB_DIALECT || 'postgres',
-  storage: "./__tests__/database.sqlite",
+  dialect: 'sqlite',
+  storage: process.env.DB_STORAGE || "./DB/coreDatabase.sqlite",
   operatorsAnalises: false,
   logging: false,
   define: {
