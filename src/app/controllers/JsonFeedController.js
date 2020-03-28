@@ -9,7 +9,7 @@ class JsonFeedController {
         }
 
         const { url } = req.headers;
-        // const url = "https://revistaautoesporte.globo.com/rss/ultimas/feed.xml";
+
         await Feed.load(url, function (err, { items }) {
             if (!err) {
                 let feedItems = [];
@@ -18,31 +18,45 @@ class JsonFeedController {
                     let obj = {};
                     obj.title = item.title;
                     obj.link = item.link;
-                    // console.log(obj);
-                    feedItems.push({ item: obj });
+                    obj.description = [];
+
                     const desc = item.description;
                     const $ = cheerio.load(desc);
 
                     const content = $('body');
-                    // const elem = text.children().html();
+                    // const elem = content.children().html();
                     // console.log(elem);
-                    // content.children().each((i, elem) => {
-                    //     if ($(elem).text().length > 2) {
-                    //         console.log(elem.tagName);
+                    content.children().each((i, elem) => {
+                        if ($(elem).text().length > 2) {
+                            if ($(elem).hasClass('foto')) {
+                                obj.description.push({
+                                    type: 'image',
+                                    content: $(elem).find('img').attr('src')
+                                });
+                            }
 
-                    //         if ($(elem).hasClass('foto')) {
-                    //             console.log($(elem).find('img').attr('src'));
-                    //         }
-                    //         if (elem.tagName == 'p') {
-                    //             console.log($(elem).text());
-                    //         }
+                            if (elem.tagName == 'p') {
+                                obj.description.push({
+                                    type: 'text',
+                                    content: $(elem).text()
+                                });
+                            }
 
-                    //         console.log('\n');
-                    //     }
-                    //     // if ($(this).has('.foto')) {
-                    //     //   console.log('foto');
-                    //     // }
-                    // });
+                            if ($(elem).hasClass('saibamais')) {
+                                let links = [];
+                                $(elem).find('ul').each((i, li) => {
+                                    $(li).find('a').each((i, a) => {
+                                        links.push($(a).attr('href'));
+                                    });
+                                });
+                                obj.description.push({
+                                    type: 'links',
+                                    content: links
+                                });
+                            }
+                        }
+                    });
+                    feedItems.push({ item: obj });
                 }
                 // console.log(feedItems);
                 // const json = {};
