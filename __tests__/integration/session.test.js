@@ -2,8 +2,9 @@ const request = require('supertest');
 
 const app = require('../../src/app');
 const truncate = require('../utils/truncate');
-const factory = require('../factories');
+const factory = require('../fakeFactories');
 
+//  Tests to authentication
 describe("Authentication", () => {
     beforeEach(async () => {
         await truncate();
@@ -67,7 +68,7 @@ describe("Authentication", () => {
         expect(response.status).toBe(200);
     });
 
-    it('should not be able to accss private routes without jwt token', async () => {
+    it('should not be able to access private routes without jwt token', async () => {
         const response = await request(app).get("/dashboard")
 
         expect(response.status).toBe(401);
