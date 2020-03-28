@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -104,7 +104,9 @@
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
 <a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -117,10 +119,12 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -162,38 +166,40 @@ class JsonFeedController {
         }
 &nbsp;
         const { url } = req.headers;
-        console.log(url);
-        res.status(200).send();
-        // Feed.load(url, function (err, { items }) {
-        //     console.log(err);
-        /* if (!err) {
-            const html = items[0].description;
-            const $ = cheerio.load(html);
+        console.log(req.headers);
+        console.log(req.body);
+        console.log(req.params);
+        await Feed.load(url, function (err, rss) {
+            if (err || !rss.items) {
+                return res.status(400).json({ message: "Isn't a rss feed url" });
+            }
+            res.status(200);
+            // if (!err) {
+            //     const html = items[0].description;
+            //     const $ = cheerio.load(html);
 &nbsp;
-            const text = $('body');
-            // const elem = text.children().html();
-            // console.log(elem);
-            text.children().each((i, elem) =&gt; {
-                if ($(elem).text().length &gt; 2) {
-                    console.log(elem.tagName);
+            //     const text = $('body');
+            //     // const elem = text.children().html();
+            //     // console.log(elem);
+            //     text.children().each((i, elem) =&gt; {
+            //         if ($(elem).text().length &gt; 2) {
+            //             console.log(elem.tagName);
 &nbsp;
-                    if ($(elem).hasClass('foto')) {
-                        console.log($(elem).find('img').attr('src'));
-                    }
-                    if (elem.tagName == 'p') {
-                        console.log($(elem).text());
-                    }
+            //             if ($(elem).hasClass('foto')) {
+            //                 console.log($(elem).find('img').attr('src'));
+            //             }
+            //             if (elem.tagName == 'p') {
+            //                 console.log($(elem).text());
+            //             }
 &nbsp;
-                    console.log('\n');
-                }
-                // if ($(this).has('.foto')) {
-                //   console.log('foto');
-                // }
-            });
-            // console.log(text.children(0).html());
-        } */
-        // else
-        //     console.log(err);
+            //             console.log('\n');
+            //         }
+            //         // if ($(this).has('.foto')) {
+            //         //   console.log('foto');
+            //         // }
+            //     });
+            // }
+        });
     };
 }
 &nbsp;
@@ -205,7 +211,7 @@ module.exports = new JsonFeedController();</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Mar 27 2020 20:28:15 GMT-0300 (Brasilia Standard Time)
+                at Sat Mar 28 2020 14:34:33 GMT-0300 (Brasilia Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

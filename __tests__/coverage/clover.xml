@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1585351695304" clover="3.2.0">
-  <project timestamp="1585351695305" name="All files">
-    <metrics statements="79" coveredstatements="76" conditionals="19" coveredconditionals="14" methods="14" coveredmethods="14" elements="112" coveredelements="104" complexity="0" loc="79" ncloc="79" packages="5" files="9" classes="9"/>
+<coverage generated="1585416873176" clover="3.2.0">
+  <project timestamp="1585416873176" name="All files">
+    <metrics statements="84" coveredstatements="81" conditionals="23" coveredconditionals="18" methods="15" coveredmethods="15" elements="122" coveredelements="114" complexity="0" loc="84" ncloc="84" packages="5" files="9" classes="9"/>
     <package name="src">
       <metrics statements="20" coveredstatements="18" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="4"/>
       <file name="app.js" path="C:\Users\lucas\Documents\crawler-challange\src\app.js">
@@ -35,9 +35,9 @@
       </file>
     </package>
     <package name="src.app.controllers">
-      <metrics statements="17" coveredstatements="17" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+      <metrics statements="22" coveredstatements="22" conditionals="10" coveredconditionals="10" methods="3" coveredmethods="3"/>
       <file name="JsonFeedController.js" path="C:\Users\lucas\Documents\crawler-challange\src\app\controllers\JsonFeedController.js">
-        <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <metrics statements="13" coveredstatements="13" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="7" count="2" type="cond" truecount="2" falsecount="0"/>
@@ -45,7 +45,12 @@
         <line num="11" count="2" type="stmt"/>
         <line num="12" count="2" type="stmt"/>
         <line num="13" count="2" type="stmt"/>
-        <line num="48" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
       </file>
       <file name="SessionController.js" path="C:\Users\lucas\Documents\crawler-challange\src\app\controllers\SessionController.js">
         <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>

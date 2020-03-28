@@ -11,7 +11,6 @@ class AppController {
     this.routes();
 
     // const url = "https://revistaautoesporte.globo.com/rss/ultimas/feed.xml";
-
   }
 
   middlewares() {
