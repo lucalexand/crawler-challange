@@ -7,6 +7,8 @@ const JsonFeedController = require('./app/controllers/JsonFeedController');
 
 routes.post('/sessions', SessionController.store);
 
+routes.post('/createUser', SessionController.create);
+
 routes.use(authMiddleware);
 
 routes.get('/feedJsoner', JsonFeedController.feedRead);
