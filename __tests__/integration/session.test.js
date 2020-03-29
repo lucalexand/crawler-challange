@@ -5,6 +5,8 @@ const app = require('../../src/app');
 const truncate = require('../utils/truncate');
 const factory = require('../fakeFactories');
 
+const { User } = require('../../src/app/models');
+
 //  Tests to authentication
 describe("Authentication", () => {
     beforeEach(async () => {

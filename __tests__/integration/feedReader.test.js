@@ -10,7 +10,7 @@ describe("Rss Reader", () => {
         await truncate();
     });
 
-    it('should not call route withou authentication', async () => {
+    it('should not call route without authentication', async () => {
         const user = await factory.create('User');
 
         const response = await request(app)
@@ -30,15 +30,15 @@ describe("Rss Reader", () => {
         expect(response.status).toBe(400);
     });
 
-    // it('should not be a rss feed url', async () => {
-    //     const user = await factory.create('User');
-    //     const url = 'https://revistaautoesporte.globo.com/rss/ultimas/feed.xml';
-    //     // const url = "https://g1.globo.com/";
-    //     const response = await request(app)
-    //         .get("/feedJsoner")
-    //         .set('Authorization', `Bearer ${user.generateToken()}`)
-    //         .set('url', url)
+    it('should not be a rss feed url', async () => {
+        const user = await factory.create('User');
+        // const url = 'https://revistaautoesporte.globo.com/rss/ultimas/feed.xml';
+        const url = "https://g1.globo.com/";
+        const response = await request(app)
+            .get("/feedJsoner")
+            .set('Authorization', `Bearer ${user.generateToken()}`)
+            .set('url', url)
 
-    //     expect(response.status).toBe(200);
-    // });
+        expect(response.status).toBe(400);
+    });
 });

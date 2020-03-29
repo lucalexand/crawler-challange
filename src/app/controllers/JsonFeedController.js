@@ -6,16 +6,17 @@ class JsonFeedController {
     async feedRead(req, res) {
         try {
             if (!req.headers.url) {
-                res.status(400).json({ message: 'Request without feed url' });
+                return res.status(400).json({ message: 'Request without feed url' });
             }
 
             const { url } = req.headers;
 
             const feedReaderPromise = (url) => {
                 return new Promise((resolve, reject) => {
-                    Feed.load(url, function (err, { items }) {
-                        if (!err) {
+                    Feed.load(url, function (err, rss) {
+                        if (!err && !rss.items) {
                             let feedItems = [];
+                            const { items } = rss;
 
                             for (let item of items) {
                                 let obj = {};
@@ -62,16 +63,17 @@ class JsonFeedController {
 
                             resolve({ feed: feedItems });
                         } else {
-                            reject(err);
+                            reject({ err, message: 'Not is a feed url' });
                         }
                     });
                 });
             }
 
             const feedJson = await feedReaderPromise(url);
-            res.status(200).json(feedJson);
+            return res.status(200).json(feedJson);
         } catch (error) {
-            res.json(error);
+            const { err, message } = error;
+            return res.status(400).json({ err, message });
         }
     };
 }
