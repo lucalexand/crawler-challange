@@ -14,8 +14,9 @@ class JsonFeedController {
             const feedReaderPromise = (url) => {
                 return new Promise((resolve, reject) => {
                     Feed.load(url, function (err, rss) {
-                        if (!err && !rss.items) {
+                        if (!err) {
                             let feedItems = [];
+
                             const { items } = rss;
 
                             for (let item of items) {
