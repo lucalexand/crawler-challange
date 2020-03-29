@@ -1,4 +1,5 @@
 const request = require('supertest');
+const bcrypt = require('bcryptjs');
 
 const app = require('../../src/app');
 const truncate = require('../utils/truncate');
@@ -9,6 +10,50 @@ describe("Authentication", () => {
     beforeEach(async () => {
         await truncate();
     })
+
+    it('should encrypt user password', async () => {
+        const user = await User.create({
+            name: 'Lucas',
+            email: 'lucalexand@gmail.com',
+            password: '123456'
+        });
+
+        const compareHash = await bcrypt.compare('123456', user.password_hash);
+        expect(compareHash).toBe(true);
+    });
+
+    it('should create a user', async () => {
+        const response = await request(app)
+            .post("/createUser")
+            .send({
+                name: 'Lucas',
+                email: 'lucalexand@gmail.com',
+                password: '123456'
+            })
+
+        expect(response.status).toBe(200);
+    });
+
+    it('should not create a user with existing email', async () => {
+        const response1 = await request(app)
+            .post("/createUser")
+            .send({
+                name: 'Lucas',
+                email: 'lucalexand@gmail.com',
+                password: '123456'
+            });
+
+        const response2 = await request(app)
+            .post("/createUser")
+            .send({
+                name: 'Lucas',
+                email: 'lucalexand@gmail.com',
+                password: '123456'
+            });
+
+        expect(response2.status).toBe(400);
+    });
+
 
     it('should authenticate with valid credentials', async () => {
         const user = await factory.create('User', {

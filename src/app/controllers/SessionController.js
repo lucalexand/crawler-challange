@@ -2,26 +2,34 @@ const { User } = require('../models');
 
 class SessionController {
     async create(req, res) {
-        const { name, email, password } = req.body;
+        try {
+            const { name, email, password } = req.body;
 
-        const user = await User.create({ name, email, password });
+            const user = await User.create({ name, email, password });
 
-        res.status(200).json({ message: 'User created!' });
+            return res.status(200).json({ message: 'User created!' });
+        } catch (error) {
+            return res.status(400).json({ message: "User wasn't created", error });
+        }
     }
     async store(req, res) {
-        const { email, password } = req.body;
+        try {
+            const { email, password } = req.body;
 
-        const user = await User.findOne({ where: { email } });
+            const user = await User.findOne({ where: { email } });
 
-        if (!user) {
-            return res.status(401).json({ message: 'User not found' });
+            // if (!user) {
+            //     return res.status(401).json({ message: 'User not found' });
+            // }
+
+            if (!(await user.checkPassword(password))) {
+                return res.status(401).json({ message: 'Incorrect password' });
+            }
+
+            return res.json({ user, token: user.generateToken() });
+        } catch (error) {
+            return res.status(401).json({ message: 'User not found', error });
         }
-
-        if (!(await user.checkPassword(password))) {
-            return res.status(401).json({ message: 'Incorrect password' });
-        }
-
-        return res.json({ user, token: user.generateToken() });
     }
 }
 
