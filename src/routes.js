@@ -5,6 +5,10 @@ const authMiddleware = require('./app/middleware/auth');
 const SessionController = require('./app/controllers/SessionController');
 const JsonFeedController = require('./app/controllers/JsonFeedController');
 
+routes.get('/', (req, res) => {
+    res.send('Olá, Siga as instruções no README do repositório');
+});
+
 routes.post('/sessions', SessionController.store);
 
 routes.post('/createUser', SessionController.create);
