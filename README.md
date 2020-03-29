@@ -2,7 +2,8 @@
 
 Para rodar o projeto:
 - clone o projeto
-- rode com yarn dev
+- rode docker build -t lucasale/crawlerchallange .
+- rode docker run -p 3000:3000 -d lucasale/crawlerchallange
 
 Para testar as rotas:
 Vá no postman e importe a coleção (https://www.getpostman.com/collections/50fecee2efee0421690e), então:
