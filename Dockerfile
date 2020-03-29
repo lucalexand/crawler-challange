@@ -4,7 +4,6 @@ WORKDIR /usr/crawler-challange
 
 COPY package*.json yarn.* ./
 RUN yarn
-RUN yarn add sqlite3
 
 COPY . .
 
