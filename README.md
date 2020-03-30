@@ -16,11 +16,13 @@ então:
 - Rode a rota Sessão, colocando no body o email e a senha do usuario criado
 - Na resposta dessa rota terá um token importante para o próximo passo
 - Rode a rota Feed Reader colocando o Bearer Token no Authorization
-assim terá o JSON estruturado como pedido.
+
+Assim terá o JSON estruturado como pedido.
 
 Para rodar os testes:
 - Vá no arquivo .env
 - Comente a linha 1
 - Descomente as linhas 3 e 4
 - No terminal rode yarn test
+
 Assim terá o resultado dos testes feitos.
