@@ -9,7 +9,7 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js --ignore __tests__ --ignore DB",
     "pretest": "sequelize db:migrate",
-    "test": "set NODE_ENV=test && jest",
+    "test": "jest",
     "posttest": "sequelize db:migrate:undo:all"
   },
   "dependencies": {
